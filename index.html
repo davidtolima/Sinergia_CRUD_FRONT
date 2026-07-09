@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIHOS - Listado de Pacientes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>SIHOS - Gestion de Pacientes</h1>
+    </header>
+
+    <main>
+        <section class="formulario-contenedor">
+            <h2 id="tituloFormulario">Registrar paciente</h2>
+
+            <div id="mensaje" class="mensaje oculto"></div>
+
+            <form id="formPaciente">
+                <input type="hidden" id="pacienteId">
+
+                <div class="fila">
+                    <div class="campo">
+                        <label for="tipoDocumento">Tipo de documento</label>
+                        <select id="tipoDocumento" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="numeroDocumento">Numero de documento</label>
+                        <input type="text" id="numeroDocumento" required>
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="campo">
+                        <label for="nombre1">Primer nombre</label>
+                        <input type="text" id="nombre1" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="nombre2">Segundo nombre</label>
+                        <input type="text" id="nombre2">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="campo">
+                        <label for="apellido1">Primer apellido</label>
+                        <input type="text" id="apellido1" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="apellido2">Segundo apellido</label>
+                        <input type="text" id="apellido2">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="campo">
+                        <label for="genero">Genero</label>
+                        <select id="genero" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="correo">Correo</label>
+                        <input type="email" id="correo" required>
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="campo">
+                        <label for="departamento">Departamento</label>
+                        <select id="departamento" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="municipio">Municipio</label>
+                        <select id="municipio" required>
+                            <option value="">Seleccione un departamento primero</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="acciones-formulario">
+                    <button type="submit" id="btnGuardar">Guardar paciente</button>
+                    <button type="button" id="btnCancelar" class="secundario oculto">Cancelar edicion</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="tabla-contenedor">
+            <h2>Pacientes registrados</h2>
+            <table id="tablaPacientes">
+                <thead>
+                    <tr>
+                        <th>Documento</th>
+                        <th>Nombre completo</th>
+                        <th>Genero</th>
+                        <th>Departamento</th>
+                        <th>Municipio</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTablaPacientes">
+                    <tr><td colspan="7">Cargando pacientes...</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
