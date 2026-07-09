@@ -4,13 +4,44 @@ let municipiosTodos = [];
 let idEnEdicion = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+    if (!localStorage.getItem("token")) {
+        window.location.href = "login.html";
+        return;
+    }
+
     cargarCatalogos();
     cargarPacientes();
 
     document.getElementById("formPaciente").addEventListener("submit", guardarPaciente);
     document.getElementById("departamento").addEventListener("change", filtrarMunicipios);
     document.getElementById("btnCancelar").addEventListener("click", cancelarEdicion);
+    document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
 });
+
+function cerrarSesion() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    window.location.href = "login.html";
+}
+
+async function peticionAutenticada(url, opciones = {}) {
+    const token = localStorage.getItem("token");
+
+    const respuesta = await fetch(url, {
+        ...opciones,
+        headers: {
+            ...(opciones.headers || {}),
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (respuesta.status === 401) {
+        cerrarSesion();
+        throw new Error("Sesion expirada");
+    }
+
+    return respuesta;
+}
 
 async function cargarCatalogos() {
     try {
@@ -67,7 +98,7 @@ async function cargarPacientes() {
     const cuerpoTabla = document.getElementById("cuerpoTablaPacientes");
 
     try {
-        const respuesta = await fetch(`${API_BASE}/paciente.php`);
+        const respuesta = await peticionAutenticada(`${API_BASE}/paciente.php`);
         const pacientes = await respuesta.json();
 
         if (!Array.isArray(pacientes) || pacientes.length === 0) {
@@ -121,7 +152,7 @@ async function guardarPaciente(evento) {
     }
 
     try {
-        const respuesta = await fetch(`${API_BASE}/paciente.php`, {
+        const respuesta = await peticionAutenticada(`${API_BASE}/paciente.php`, {
             method: esEdicion ? "PUT" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(paciente),
@@ -145,7 +176,7 @@ async function guardarPaciente(evento) {
 
 async function editarPaciente(id) {
     try {
-        const respuesta = await fetch(`${API_BASE}/paciente.php?id=${id}`);
+        const respuesta = await peticionAutenticada(`${API_BASE}/paciente.php?id=${id}`);
         const paciente = await respuesta.json();
 
         idEnEdicion = paciente.id;
@@ -182,7 +213,7 @@ async function eliminarPaciente(id) {
     }
 
     try {
-        const respuesta = await fetch(`${API_BASE}/paciente.php?id=${id}`, {
+        const respuesta = await peticionAutenticada(`${API_BASE}/paciente.php?id=${id}`, {
             method: "DELETE",
         });
 
