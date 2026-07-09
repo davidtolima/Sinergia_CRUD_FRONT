@@ -16,6 +16,12 @@ header {
     padding: 20px 30px;
 }
 
+header.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 header h1 {
     margin: 0;
     font-size: 22px;
