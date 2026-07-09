@@ -1,3 +1,10 @@
+:root {
+    --vinotinto: #7a1e35;
+    --vinotinto-oscuro: #5c1628;
+    --dorado: #d4af37;
+    --dorado-claro: #f3e6c4;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -11,9 +18,10 @@ body {
 }
 
 header {
-    background-color: #1d4ed8;
+    background-color: var(--vinotinto);
     color: #fff;
     padding: 20px 30px;
+    border-bottom: 4px solid var(--dorado);
 }
 
 header.cabecera {
@@ -38,6 +46,7 @@ main {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    border-top: 3px solid var(--dorado);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     margin-bottom: 30px;
 }
@@ -45,7 +54,7 @@ main {
 h2 {
     margin-top: 0;
     font-size: 18px;
-    color: #1d4ed8;
+    color: var(--vinotinto);
 }
 
 .fila {
@@ -84,14 +93,14 @@ button {
     padding: 10px 18px;
     border: none;
     border-radius: 4px;
-    background-color: #1d4ed8;
+    background-color: var(--vinotinto);
     color: #fff;
     font-size: 14px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #1e40af;
+    background-color: var(--vinotinto-oscuro);
 }
 
 button.secundario {
@@ -136,7 +145,8 @@ th, td {
 }
 
 th {
-    background-color: #f3f4f6;
+    background-color: var(--dorado-claro);
+    color: var(--vinotinto-oscuro);
 }
 
 .mensaje {
